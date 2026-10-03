@@ -24,7 +24,10 @@
 }
 
 section {
+  height: 100%;
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -44,13 +47,25 @@ a:hover {
   flex-direction: column;
   white-space: pre-line;
   line-height: 1.5rem;
+  overflow: auto;
 }
 
 .terminal-input {
   display: flex;
   gap: 0.6rem;
+  flex-shrink: 0;
+
   input {
     all: unset;
     width: 100%;
   }
+}
+
+.terminal::-webkit-scrollbar {
+  width: 1px;
+}
+
+.terminal::-webkit-scrollbar-thumb {
+  background: #9b9b9b;
+  border-radius: 50px;
 }
