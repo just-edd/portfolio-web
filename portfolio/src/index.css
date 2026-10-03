@@ -4,8 +4,10 @@
   --font-family: 'JetBrains Mono', monospace;
   --background-color: #1f2937;
   --text-color: #d1d5db;
-  --guest-color:#fdba74;
-  --green-color:#4ade80;
+  --guest-color:#fca440;
+  --green-color:#8ae5ac;
+  --link-color: #fca440;
+  --link-hover-color: #f5c676;
 }
 
 * { 
@@ -14,43 +16,41 @@
   box-sizing: border-box;
 }
 
-body {
+#root {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--background-color);
   height: 100vh;
 }
 
-#root {
-  font-family: var(--font-family);
-  background-color: var(--background-color);
-  height: 100%;
-}
-
 section {
-  height: 100%;
-  animation: fadeIn 1s;
   padding: 1.5rem;
 }
 
-p {
-  color: var(--text-color);
-}
-
-.logo {
-  font-family: var(--font-family);
-  color: var(--text-color);
-  font-size: 15px;
-}
-
-.github {
+a {
   color: var(--guest-color);
-  text-decoration: underline;
-  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-bottom: dashed 1px var(--link-color);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+a:hover {
+  color: var(--link-hover-color);
+  border-color: var(--link-hover-color);
+}
+
+.terminal {
+  display: flex;
+  flex-direction: column;
+  white-space: pre-line;
+  line-height: 1.5rem;
+}
+
+.terminal-input {
+  display: flex;
+  gap: 0.6rem;
+  input {
+    all: unset;
+    width: 100%;
   }
 }
