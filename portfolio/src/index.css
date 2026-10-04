@@ -1,16 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
+/* Config */
 :root {
   --font-family: 'JetBrains Mono', monospace;
   --background-color: #1f2937;
   --text-color: #d1d5db;
-  --guest-color:#fca440;
+  --visitor-color:#fca440;
   --green-color:#8ae5ac;
-  --link-color: #fca440;
-  --link-hover-color: #f5c676;
 }
 
-* { 
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -18,54 +17,42 @@
 
 #root {
   font-family: var(--font-family);
-  color: var(--text-color);
-  background-color: var(--background-color);
+  background: var(--background-color);
   height: 100vh;
+  color: var(--text-color);
+  white-space: pre-line;
 }
 
 section {
-  height: 100%;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
+  padding: 2rem;
+  animation: fadeIn 1s ease-in-out;
 }
 
 a {
-  color: var(--guest-color);
   text-decoration: none;
-  transition: all 0.3s ease;
-  border-bottom: dashed 1px var(--link-color);
+  color: var(--visitor-color);
+  border-bottom: dashed 1px;
+
 }
 
-a:hover {
-  color: var(--link-hover-color);
-  border-color: var(--link-hover-color);
+.cursor {
+  display: inline-block;
+  width: 7px;
+  background: var(--text-color);
+  margin-left: 3px;
+  height: 1em;
+  vertical-align: middle;
+  animation: blink 0.8s infinite;
 }
 
-.terminal {
-  display: flex;
-  flex-direction: column;
-  white-space: pre-line;
-  line-height: 1.5rem;
-  overflow: auto;
-}
-
-.terminal-input {
-  display: flex;
-  gap: 0.6rem;
-  flex-shrink: 0;
-
-  input {
-    all: unset;
-    width: 100%;
+@keyframes blink {
+  50% {
+    opacity: 0;
   }
 }
 
-.terminal::-webkit-scrollbar {
-  width: 1px;
-}
-
-.terminal::-webkit-scrollbar-thumb {
-  background: #9b9b9b;
-  border-radius: 50px;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
 }

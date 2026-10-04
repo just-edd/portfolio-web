@@ -1,13 +1,12 @@
-import Header from "./components/Header"
-import Terminal from "./components/Terminal"
+import Header from "./components/Header";
 
-function App() {
+const App: React.FC = () => {
   return (
     <section>
       <Header />
-      <Terminal />
+      
     </section>
   )
-}
+};
 
-export default App
+export default App;
