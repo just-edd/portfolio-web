@@ -5,8 +5,6 @@ interface Command {
     response?: (() => string) | string;
 }
 
-export const VERSION = import.meta.env.VITE_APP_VERSION?.replace(/^v/, "") ?? "dev";
-
 export const commands: Command[] = [
     {
         name: "help",

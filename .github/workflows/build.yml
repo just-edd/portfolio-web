@@ -33,7 +33,7 @@ jobs:
 
       - name: Set version
         run: |
-          echo 'export const VERSION = "${{ github.ref_name }}";' > src/config.ts
+          echo 'export const VERSION = "${{ github.ref_name }}";' > src/version.ts
 
       - name: Build
         run: npm run build
