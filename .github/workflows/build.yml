@@ -31,14 +31,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Set version
+        run: |
+          echo 'export const VERSION = "${{ github.ref_name }}";' > src/config.ts
+
       - name: Build
         run: npm run build
-        env:
-          VITE_APP_VERSION: ${{ github.ref_name }}
-
-      - name: Build information
-        run: |
-          echo "Build completed successfully!"
-          echo "Version: $VITE_APP_VERSION"
-        env:
-          VITE_APP_VERSION: ${{ github.ref_name }}
