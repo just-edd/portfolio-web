@@ -1,48 +1,73 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
 
 /* Config */
 :root {
-  --font-family: 'JetBrains Mono', monospace;
-  --background-color: #1f2937;
-  --text-color: #d1d5db;
-  --visitor-color:#fca440;
-  --green-color:#8ae5ac;
+  /* Colors */
+  --bg: #181818;
+  --text: #67b150;
+
+  --green: #ebbb7c;
+  --green-dim: #00b8a0;
+
+  --cyan: #00e5ff;
+  --blue: #4d8cff;
+
+  --yellow: #fdc316;
+  --red: #ff5555;
+  --magenta: #ff55ff;
+
+  --gray: #666666;
+  --white: #ffffff;
+
+  --font-family: 'Inconsolata';
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: var(--font-family);
 }
 
 #root {
-  font-family: var(--font-family);
-  background: var(--background-color);
+  background: var(--bg);
+  color: var(--text);
   height: 100vh;
-  color: var(--text-color);
   white-space: pre-line;
 }
 
 section {
   padding: 2rem;
   animation: fadeIn 1s ease-in-out;
+  height: 100%;
+  overflow: auto;
 }
 
 a {
   text-decoration: none;
-  color: var(--visitor-color);
-  border-bottom: dashed 1px;
+  color: var(--yellow);
+  border-bottom: dashed 1px var(--yellow);
+  transition: all 0.2s;
+}
 
+a:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
 }
 
 .cursor {
   display: inline-block;
   width: 7px;
-  background: var(--text-color);
-  margin-left: 3px;
   height: 1em;
-  vertical-align: middle;
-  animation: blink 0.8s infinite;
+  margin-left: 3px;
+  background: var(--text);
+  animation: blink 0.8s linear infinite;
+  vertical-align: text-bottom;
+}
+
+input {
+  all: unset;
+  width: 100%;
 }
 
 @keyframes blink {
@@ -55,4 +80,18 @@ a {
   0% {
     opacity: 0;
   }
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray);
+  border-radius: 100%;
+}
+
+::selection {
+  background: var(--text);
+  color: var(--bg);
 }

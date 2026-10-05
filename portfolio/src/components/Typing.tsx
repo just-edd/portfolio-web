@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Typing: React.FC<{ text: string; speed?: number }> = ({ text, speed = 75 }) => {
+const Typing: React.FC<{ text: string; speed?: number }> = ({ text, speed = 25 }) => {
     const [displayed, setDisplayed] = useState<string>("");
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const Typing: React.FC<{ text: string; speed?: number }> = ({ text, speed = 75 }
     return (
         <p>
             <span>{displayed}</span>
-            <span className="cursor"></span>
+            {displayed !== text && <span className="cursor"></span>}
         </p>
     )
 };
