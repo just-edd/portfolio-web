@@ -1,4 +1,4 @@
-import { VERSION } from "../config";
+import { VERSION } from "../version";
 import Logo from "./Logo";
 
 const Header: React.FC = () => {
