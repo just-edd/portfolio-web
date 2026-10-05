@@ -5,26 +5,40 @@ on:
     tags:
       - "v*.*.*"
 
+permissions:
+  contents: read
+
 jobs:
   build:
+    name: Build Portfolio
     runs-on: ubuntu-latest
-    steps:
-      - name: Get latest code
-        uses: actions/checkout@v6
 
-      - name: Setup Node
-        uses: actions/setup-node@v6
+    defaults:
+      run:
+        working-directory: portfolio
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: portfolio/package-lock.json
 
       - name: Install dependencies
-        working-directory: portfolio
         run: npm ci
 
       - name: Build
-        working-directory: portfolio
         run: npm run build
+        env:
+          VITE_APP_VERSION: ${{ github.ref_name }}
+
+      - name: Build information
+        run: |
+          echo "Build completed successfully!"
+          echo "Version: $VITE_APP_VERSION"
         env:
           VITE_APP_VERSION: ${{ github.ref_name }}
