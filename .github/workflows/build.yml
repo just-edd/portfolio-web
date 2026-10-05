@@ -18,6 +18,11 @@ jobs:
         working-directory: portfolio
 
     steps:
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+          
       - name: Checkout
         uses: actions/checkout@v4
 
