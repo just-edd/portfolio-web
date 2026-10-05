@@ -1,3 +1,4 @@
+import { VERSION } from "../config";
 import Logo from "./Logo";
 
 const Header: React.FC = () => {
@@ -5,7 +6,7 @@ const Header: React.FC = () => {
         <>
             <p><span style={{ color: 'var(--yellow)' }}>visitor</span>@<span style={{ color: 'var(--green)' }}>terminal.edd.dev</span>:~$ welcome</p>
             <Logo />
-            <p>Welcome to my terminal portfolio. (Version 1.0.0)</p>
+            <p>Welcome to my terminal portfolio. (Version {VERSION})</p>
             <br />
             <p>-----</p>
             <br />
