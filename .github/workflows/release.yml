@@ -7,6 +7,7 @@ on:
 
 jobs:
   create-release:
+    if: github.actor_id != 278903378
     runs-on: ubuntu-latest
     steps:
       - name: Install Bun
@@ -17,8 +18,8 @@ jobs:
       - name: Get latest code
         uses: actions/checkout@v4
         with:
-          ref: main
           fetch-depth: 0
+          ref: ${{ github.event.repository.default_branch }}
 
       - name: Bump version
         run: bun run .github/actions/bump-version.js
