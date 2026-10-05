@@ -13,10 +13,6 @@ jobs:
     name: Build Portfolio
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: portfolio
-
     steps:
       - name: Install Bun
         uses: oven-sh/setup-bun@v2
@@ -33,13 +29,23 @@ jobs:
           cache: npm
           cache-dependency-path: portfolio/package-lock.json
 
-      - name: Install dependencies
-        run: npm ci
-
       - name: Bump version
         run: bun run .github/actions/bump-version.js
         env:
           TGT_RELEASE_VERSION: ${{ github.ref_name }}
 
-      - name: Build
-        run: npm run build
+      - name: Push version bump change
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: portfolio/src/version.ts
+          push: true
+          default_author: github_actions
+          message: "chore: bump version to ${{ github.ref_name }}"
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+        working-directory: portfolio
+
+      - name: Run build script
+        run: bun run build
+        working-directory: web
