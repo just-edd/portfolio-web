@@ -6,7 +6,7 @@ const Header: React.FC = () => {
         <>
             <p><span style={{ color: 'var(--yellow)' }}>visitor</span>@<span style={{ color: 'var(--green)' }}>terminal.edd.dev</span>:~$ welcome</p>
             <Logo />
-            <p>Welcome to my terminal portfolio. (Version {VERSION})</p>
+            <p>Welcome to my terminal portfolio. (Version {VERSION.slice(1)})</p>
             <br />
             <p>-----</p>
             <br />

@@ -44,3 +44,8 @@ jobs:
       - name: Run build script
         run: bun run build
         working-directory: portfolio
+
+      - name: Update tag
+        uses: EndBug/latest-tag@v1
+        with:
+          ref: ${{ github.ref_name }}
