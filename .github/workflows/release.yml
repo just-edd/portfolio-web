@@ -1,18 +1,13 @@
-name: Build
+name: Create release
 
 on:
   push:
     tags:
       - "v*.*.*"
 
-permissions:
-  contents: read
-
 jobs:
-  build:
-    name: Build Portfolio
+  create-release:
     runs-on: ubuntu-latest
-
     steps:
       - name: Install Bun
         uses: oven-sh/setup-bun@v2
@@ -48,4 +43,4 @@ jobs:
 
       - name: Run build script
         run: bun run build
-        working-directory: web
+        working-directory: portfolio
