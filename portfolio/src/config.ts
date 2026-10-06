@@ -62,6 +62,16 @@ export const commands: Command[] = [
         You can contact me through the available social links on this portfolio.`,
     },
     {
+        name: "socials",
+        description: "Open my socials",
+        response: () => {
+            setTimeout(() => window.open('https://github.com/just-edd', '_blank'), 4000);
+
+            return `You can contact me via my e-mail. My e-mail can be seen on my GitHub profile.
+            Opening my GitHub profile...`
+        },
+    },
+    {
         name: "coffee",
         description: "Check my coffee status",
         response: `Coffee status: ████████████████████ 100%

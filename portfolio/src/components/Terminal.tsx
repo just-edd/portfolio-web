@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { commands } from "../config";
 import Typing from "./Typing";
 
@@ -48,6 +48,35 @@ const Terminal: React.FC = () => {
         setInput("");
     };
 
+    {/* Key listener, so we don't have to use input... it will always listens for key */}
+    useEffect(() => {
+        const listenForKey = (e: KeyboardEvent) => {
+            switch(e.key) {
+                case 'Enter':
+                    executeCommand();
+                    return;
+                case 'Backspace':
+                    setInput(prev => prev.slice(0, -1));
+                    return;
+                case 'Tab':
+                    e.preventDefault();
+                    return;
+                default:
+                    e.preventDefault(); // prevent ctrl + a
+                    if (
+                        e.key.length === 1 &&
+                        !e.ctrlKey &&
+                        !e.altKey &&
+                        !e.metaKey
+                    ) setInput(prev => prev + e.key);
+            };
+        };
+
+        window.addEventListener("keydown", listenForKey);
+
+        return () => window.removeEventListener("keydown", listenForKey);
+    }, [executeCommand]);
+
     return (
         <>
             <div>
@@ -60,16 +89,12 @@ const Terminal: React.FC = () => {
             </div>
 
             {/* Input */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
+            <div style={{ display: 'inline-flex' }}>
                 <p><span style={{ color: 'var(--yellow)' }}>visitor</span>@<span style={{ color: 'var(--green)' }}>terminal.edd.dev</span>:~$</p>
-                <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => {
-                    if (e.key === "Enter") executeCommand();
-                }}
-                autoFocus
-                />
+                <div className="input-wrapper">
+                    <span>{input}</span>
+                    <span className="custom-caret"></span>
+                </div>
             </div>
         </>
     )
