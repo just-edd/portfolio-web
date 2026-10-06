@@ -5,6 +5,7 @@ import Terminal from "./components/Terminal";
 const App: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
+  // Auto-scroll func
   const autoScroll = () => {
     sectionRef.current?.scrollTo({
       behavior: 'auto',
