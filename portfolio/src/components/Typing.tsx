@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Typing: React.FC<{ text: string; speed?: number }> = ({ text, speed = 25 }) => {
+const Typing: React.FC<{ text: string; speed?: number; onUpdate?: () => void }> = ({ text, speed = 25, onUpdate }) => {
     const [displayed, setDisplayed] = useState<string>("");
 
     useEffect(() => {
@@ -9,6 +9,8 @@ const Typing: React.FC<{ text: string; speed?: number }> = ({ text, speed = 25 }
         const interval = setInterval(() => {
             setDisplayed(text.slice(0, index + 1));
             index++;
+
+            onUpdate?.();
 
             if (index >= text.length)
                 clearInterval(interval);

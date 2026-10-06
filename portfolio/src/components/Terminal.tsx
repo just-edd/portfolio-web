@@ -7,7 +7,7 @@ interface History {
     response?: string;
 }
 
-const Terminal: React.FC = () => {
+const Terminal: React.FC<{ autoScroll: () => void }> = ({ autoScroll }) => {
     const [history, setHistory] = useState<History[]>([]);
     const [input, setInput] = useState<string>("");
 
@@ -48,7 +48,7 @@ const Terminal: React.FC = () => {
         setInput("");
     };
 
-    {/* Key listener, so we don't have to use input... it will always listens for key */}
+    // Key listener, so we don't have to use input... it will always listens for key
     useEffect(() => {
         const listenForKey = (e: KeyboardEvent) => {
             switch(e.key) {
@@ -83,13 +83,13 @@ const Terminal: React.FC = () => {
                 {history.map((data, index) => (
                     <div key={index}>
                         <p><span style={{ color: 'var(--yellow)' }}>visitor</span>@<span style={{ color: 'var(--green)' }}>terminal.edd.dev</span>:~$ {data.command}</p>
-                        {data.response && <Typing text={data.response} />}
+                        {data.response && <Typing text={data.response} onUpdate={autoScroll} />}
                     </div>
                 ))}
             </div>
 
             {/* Input */}
-            <div style={{ display: 'inline-flex' }}>
+            <div style={{ display: 'inline-flex', scrollBehavior: 'smooth' }}>
                 <p><span style={{ color: 'var(--yellow)' }}>visitor</span>@<span style={{ color: 'var(--green)' }}>terminal.edd.dev</span>:~$</p>
                 <div className="input-wrapper">
                     <span>{input}</span>

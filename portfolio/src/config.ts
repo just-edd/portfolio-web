@@ -17,6 +17,17 @@ export const commands: Command[] = [
         }
     },
     {
+        name: "about",
+        description: "Learn something new about me",
+        response: `Hey! My name is Tim Barabas, but everyone calls me 'edd'. I'm 20 years old from Eastern Slovakia.
+        I started programming 3 years ago as a FiveM developer. For 2 years, I created scripts (known as "resources")
+        for FiveM, but then I had to take a break from programming to focus on my final year of high school. Alongside
+        my FiveM work, I also developed various websites and games (though neither was ever released). After graduation,
+        I developed a passion for game development. I create smaller games using engines like Unity or Unreal Engine 5.
+        Currently, I focus on web and game development (especially content creation for FiveM). I have never regretted
+        learning to program, as it allows me to turn "unrealistic" ideas into reality. In short, programming is my passion.`
+    },
+    {
         name: "skills",
         description: "Display my programming skills",
         response: `Over the years, I've worked with many different technologies and programming languages.
