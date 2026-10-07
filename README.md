@@ -8,6 +8,7 @@ For example, command `help` will show you everything you can do. But there are s
 Additional commands can be added to the `config.ts` file; simply follow the instructions provided in that file.
 
 ## ⚡ Features
+- Fetching live data from github
 - Interactive terminal interface
 - Command-based navigation
 - Typing animation
