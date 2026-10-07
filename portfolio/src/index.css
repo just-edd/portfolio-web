@@ -95,6 +95,7 @@ a:hover {
   position: relative;
   display: inline-block;
   margin-left: 7px;
+  white-space: pre;
 }
 
 .custom-caret {

@@ -58,9 +58,6 @@ const Terminal: React.FC<{ autoScroll: () => void }> = ({ autoScroll }) => {
                 case 'Backspace':
                     setInput(prev => prev.slice(0, -1));
                     return;
-                case 'Tab':
-                    e.preventDefault();
-                    return;
                 default:
                     e.preventDefault(); // prevent ctrl + a
                     if (

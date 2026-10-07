@@ -8,6 +8,8 @@ export interface GithubUser {
     followers: number;
     following: number;
     html_url: string;
+    location: string;
+    created_at: string;
 }
 
 export interface GithubRepo {
