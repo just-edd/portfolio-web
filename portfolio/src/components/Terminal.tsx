@@ -11,7 +11,7 @@ const Terminal: React.FC<{ autoScroll: () => void }> = ({ autoScroll }) => {
     const [history, setHistory] = useState<History[]>([]);
     const [input, setInput] = useState<string>("");
 
-    const executeCommand = () => {
+    const executeCommand = async () => {
         const command = input.trim();
 
         if (!command) return;
@@ -36,7 +36,7 @@ const Terminal: React.FC<{ autoScroll: () => void }> = ({ autoScroll }) => {
             return;
         }
 
-        const response = typeof validCommand.response === "function" ? validCommand.response() : validCommand.response;
+        const response = typeof validCommand.response === "function" ? await validCommand.response() : validCommand.response;
 
         setHistory((prev) => [
             ...prev,

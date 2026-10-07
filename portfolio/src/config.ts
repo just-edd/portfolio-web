@@ -1,8 +1,10 @@
+import { getGithubEvents, getGithubRepos, getGithubUser } from "./api/github";
+
 interface Command {
     name: string;
     description: string;
     hidden?: boolean;
-    response?: (() => string) | string;
+    response?: string | (() => string | Promise<string>);
 }
 
 export const commands: Command[] = [
@@ -59,11 +61,73 @@ export const commands: Command[] = [
     {
         name: "github",
         description: "Open my GitHub profile",
-        response: () => {
-            setTimeout(() => window.open('https://github.com/just-edd', '_blank'), 4000);
+        response: async () => {
+            const [user, repos, events] = await Promise.all([
+                getGithubUser(),
+                getGithubRepos(),
+                getGithubEvents()
+            ]);
 
-            return `You can find my open-source projects, experiments and other work on GitHub.
-            Opening my GitHub profile...`
+            const languages = repos.reduce<Record<string, number>>((acc, repo) => {
+                if (repo.language)
+                    acc[repo.language] = (acc[repo.language] ?? 0) + 1;
+
+                return acc;
+            }, {});
+
+            const topLanguages = Object.entries(languages)
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 5);
+
+            const latestRepos = repos.slice(0, 5);
+            const latestEvents = events.slice(0, 5);
+            
+            return `
+            GitHub
+            ------
+
+            User: ${user.login}
+            Repositories: ${user.public_repos}
+            Followers: ${user.followers}
+            Following: ${user.following}
+
+            Latest repositories:
+            ${latestRepos
+                .map((repo) => `  → ${repo.name}${repo.language ? ` · ${repo.language}` : ''}`)
+                .join('\n')
+            }
+
+            Latest activity:
+            ${latestEvents
+                .map((event) => {
+                    switch (event.type) {
+                        case 'PushEvent':
+                            return `  → Pushed to ${event.repo.name}`;
+                        case 'CreateEvent':
+                            return `  → Created ${event.repo.name}`;
+                        case 'IssuesEvent':
+                            return `  → Updated an issue in ${event.repo.name}`;
+                        case 'PullRequestEvent':
+                            return `  → Updated a pull request in ${event.repo.name}`;
+                        case 'WatchEvent':
+                            return `  → Starred ${event.repo.name}`;
+                        case 'ForkEvent':
+                            return `  → Forked ${event.repo.name}`;
+                        default:
+                            return `  → ${event.type.replace('Event', '')} ${event.repo.name}`
+                    }
+                })
+                .join('\n')
+            }
+
+            Languages:
+            ${topLanguages
+                .map(([language, count]) => `  → ${language} (${count} repos)`)
+                .join('\n')
+            }
+
+            ${user.html_url}
+            `.trim();
         },
     },
     {
